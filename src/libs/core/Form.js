@@ -14,7 +14,7 @@ export default class Form {
         url, 
         data, 
         withCredentials: true,
-        baseURL: process.env.VUE_APP_RECRUITER_API,
+        baseURL: process.env.VUE_APP_WABA_API,
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json',

@@ -84,7 +84,9 @@ export default {
         this.loading = true
         this.authObj.login()
           .then(() => {
-            this.$router.push({name: 'Dashboard'})
+            this.authObj.retrieve('apartment')
+              ? this.$router.push({name: 'dashboard'})
+              : this.$router.push({name: 'onboarding-apartment'})
           }).finally(() => {
             this.loading = false
           })

@@ -6,7 +6,7 @@
       class="app--main-content" 
       fluid
     >
-      <app-bar />
+      <!-- <app-bar /> -->
 
       <div class="content-area">
         <router-view />

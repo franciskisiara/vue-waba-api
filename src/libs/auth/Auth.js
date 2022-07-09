@@ -10,6 +10,16 @@ export default class Auth extends Base {
   }
 
   login () {
-
+    return new Promise(async (resolve, reject) => {
+      try {
+        const data = this.getFields(['phone', 'password', 'device_name'])
+        let response = await this.form.submit('post', '/api/token/generate', data)
+        this.encrypt(response.data)
+        this.setFields(fields)
+        resolve(response)
+      } catch (err) {
+        reject(err)
+      }
+    })
   }
 }
