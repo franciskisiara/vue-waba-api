@@ -83,7 +83,7 @@
         <v-btn
           block
           x-large
-          class="body-2 font-weight-bold"
+          class="body-2 font-weight-bold rounded-lg"
           color="primary"
           @click="save()"
         >

@@ -1,9 +1,9 @@
 <template>
   <v-app id="app"> 
     <!-- Global flash component -->
-    <!-- <app-flash details=""></app-flash> -->
+    <app-flash details=""></app-flash>
     
-    <v-container class="app-content" fluid>
+    <v-container class="app-content">
       <router-view></router-view>
     </v-container>
   </v-app>

@@ -6,7 +6,7 @@ export default class Auth extends Base {
   constructor () {
     super(fields);
     this.form = new Form(fields)
-    this.app = process.env.VUE_APP_NAME
+    this.app = process.env.VUE_APP_PORTAL
   }
 
   register () {
@@ -26,7 +26,7 @@ export default class Auth extends Base {
   login () {
     return new Promise(async (resolve, reject) => {
       try {
-        const data = this.getFields(['phone', 'password', 'device_name'])
+        const data = this.getFields(['username', 'password', 'device_name'])
         let response = await this.form.submit('post', '/api/token/generate', data)
         this.encrypt(response.data)
         this.setFields(fields)
@@ -34,6 +34,15 @@ export default class Auth extends Base {
       } catch (err) {
         reject(err)
       }
+    })
+  }
+
+  logout () {
+    /** @todo - add call to API to expire the token */
+    localStorage.removeItem(this.app)
+    location.href='/auth/login'
+    flash({
+      message: 'Successfully logged out'
     })
   }
 }

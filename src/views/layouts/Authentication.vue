@@ -5,7 +5,7 @@
   >
     <v-col 
       cols="12"
-      md="3"
+      md="4"
     >
       <v-card outlined class="rounded-xl">
         <v-card-text class="px-5 pt-10 pb-15">

@@ -6,7 +6,7 @@
       class="app--main-content" 
       fluid
     >
-      <!-- <app-bar /> -->
+      <app-bar />
 
       <div class="content-area">
         <router-view />
@@ -17,26 +17,10 @@
 
 <script>
 export default {
-//   components: {
-//     'app-drawer': () => import('./includes/AppDrawer.vue'),
-//     'app-bar': () => import('./includes/AppBar.vue'),
-//   },
+   components: {
+    'app-drawer': () => import('@/views/includes/AppDrawer.vue'),
+    'app-bar': () => import('@/views/includes/AppBar.vue'),
+  },
 
-  // data () {
-  //   return {
-  //     showDrawer: false
-  //   }
-  // },
-
-  // computed: {
-  //   isTiny () {
-  //     const name = this.$vuetify.breakpoint.name
-  //     return name == 'xs' || name == 'sm'
-  //   }
-  // },
-
-  // mounted () {
-  //   this.showDrawer = !this.isTiny
-  // }
 }
 </script>

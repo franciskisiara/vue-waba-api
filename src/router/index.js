@@ -83,20 +83,26 @@ const routes = [
       {
         path: '/',
         name: 'dashboard',
-        component: () => import('@/components/app/dashboard/Index.vue')
+        component: () => import('@/components/app/houses/Index.vue')
       },
 
-  //     {
-  //       path: '/listings',
-  //       name: 'listings.index',
-  //       component: () => import('@/components/app/listings/Index.vue')
-  //     },
+      {
+        path: '/houses',
+        name: 'houses.index',
+        component: () => import('@/components/app/houses/Index.vue')
+      },
 
-  // //     // {
-  // //     //   path: '/profiles',
-  // //     //   name: 'knowledge-scales.index',
-  // //     //   component: () => import('@/components/app/knowledge_scales/Index.vue')
-  // //     // },
+      // {
+      //   path: '/tenants',
+      //   name: 'tenants.index',
+      //   component: () => import('@/components/app/tenants/Index.vue')
+      // },
+
+      // {
+      //   path: '/readings',
+      //   name: 'readings.index',
+      //   component: () => import('@/components/app/readings/Index.vue')
+      // },
     ]
   }
 ]

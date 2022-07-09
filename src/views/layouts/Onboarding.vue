@@ -2,7 +2,10 @@
   <v-row 
     class="app--full-height d-flex align-center justify-center curves"
   >
-    <v-col cols="12" md="3">
+    <v-col 
+      cols="12" 
+      md="4"
+    >
       <v-card outlined class="rounded-xl">
         <v-card-text class="px-6 py-10">
           <p class="text-h5 font-weight-bold primary--text">

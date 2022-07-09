@@ -14,14 +14,13 @@
       <v-text-field
         dense
         outlined
-        type="email"
         persistent-hint
-        label="Phone"
+        label="Username"
         class="rounded-lg"
-        v-model="authObj.phone"
-        :hint="errors.get('phone')"
-        :error="errors.has('phone')"
-        @input="errors.clear('phone')"
+        v-model="authObj.username"
+        :hint="errors.get('username')"
+        :error="errors.has('username')"
+        @input="errors.clear('username')"
       ></v-text-field>
 
       <v-text-field

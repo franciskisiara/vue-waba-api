@@ -16,7 +16,6 @@ html body #app {
   margin: 0;
   padding: 0;
   min-height: 720px;
-  // background-color: #f9f9f9;
   background-color: #fff;
 
   .app-content {
@@ -28,23 +27,23 @@ html body #app {
     }
   }
 
-  // .drawer-logo {
-  //   height: 100px;
-  //   text-align: center;
-  //   font-size: 40px;
-  // }
+  .drawer-logo {
+    height: 100px;
+    text-align: center;
+    font-size: 40px;
+  }
 
-  // .app--main-content {
-  //   padding: 0px;
-  //   height: 100%;
-  //   width: 100%;
+  .app--main-content {
+    padding: 0px;
+    height: 100%;
+    width: 100%;
 
-  //   .content-area {
-  //     margin-top: 90px;
-  //     padding: 0px 9px;
-  //     margin-left: 300px;
-  //   }
-  // }
+    .content-area {
+      margin-top: 85px;
+      padding: 0px 10px;
+      // margin-left: 300px;
+    }
+  }
 
   // .curves {
   //   .v-sheet {
