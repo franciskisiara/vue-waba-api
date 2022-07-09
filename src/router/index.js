@@ -1,7 +1,10 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import Auth from '@/libs/auth/Auth'
 
 Vue.use(VueRouter)
+
+const auth = new Auth()
 
 const routes = [
   {
@@ -14,32 +17,33 @@ const routes = [
     //     next('/')
     //   }
     // },
-    // children: [
+    children: [
     //   {
     //     path: 'register',
     //     name: 'register',
     //     component: () => import('@/components/auth/Register.vue'),
     //   },
 
-    //   {
-    //     path: 'login',
-    //     name: 'login',
-    //     component: () => import('@/components/auth/Login.vue'),
-    //   },    
-    // ]
+      {
+        path: 'login',
+        name: 'login',
+        component: () => import('@/components/auth/Login.vue'),
+      },    
+    ]
   },
 
-  // {
-  //   path: '',
-  //   component: () => import('@/views/layouts/Application.vue'),
-  //   beforeEnter: (to, from, next) => {
-  //     if (!auth.retrieve('user')) {
-  //       next('/auth/login')
-  //     }
-  //     else {
-  //       next()
-  //     }
-  //   },
+  {
+    path: '',
+    component: () => import('@/views/layouts/Application.vue'),
+    beforeEnter: (to, from, next) => {
+      console.log(auth.retrieve('user'))
+      if (!auth.retrieve('user')) {
+        next('/auth/login')
+      }
+      else {
+        next()
+      }
+    },
   //   children: [
   //     {
   //       path: '/',
@@ -60,7 +64,7 @@ const routes = [
   // //     // },
   //   ]
 
-  // }
+  }
 ]
 
 const router = new VueRouter({
