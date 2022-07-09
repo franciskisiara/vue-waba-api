@@ -87,7 +87,7 @@
           color="primary"
           @click="save()"
         >
-          Save and continue
+          Configure utility charges
         </v-btn>
       </v-col>
     </v-row>
@@ -115,18 +115,20 @@ export default {
     save () {
       if (!this.loading) {
         this.loading = true
-        this.apartmentObj.store().then(() => {
-
-        })
-          // .then(() => {
-          //   this.authObj.retrieve('apartment')
-          //     ? this.$router.push({name: 'dashboard'})
-          //     : this.$router.push({name: 'onboarding-apartment'})
-          // }).finally(() => {
-          //   this.loading = false
-          // })
+        this.apartmentObj.store()
+          .then(() => {
+            this.$router.push({
+              name: 'dashboard'
+            })
+          }).finally(() => {
+            this.loading = false
+          })
       }
     }
+  },
+
+  mounted () {
+    this.apartmentObj.name = localStorage.getItem('apartment')
   }
 }
 </script>

@@ -1,5 +1,6 @@
 import Base from '@/libs/core/Base'
 import Form from '@/libs/core/Form'
+import Auth from '@/libs/auth/Auth'
 import { fields } from './ApartmentRepository'
 
 export default class Apartment extends Base {
@@ -14,10 +15,13 @@ export default class Apartment extends Base {
       try {
         const data = this.getFields(['name', 'unit_rate', 'flat_rate', 'flat_rate_limit'])
         let response = await this.form.submit('post', '/api/apartments', data)
-        // this.encrypt(response.data)
-        // this.setFields(fields)
-        // resolve(response)
-
+        const auth = new Auth()
+        auth.encrypt({
+          ...auth.decrypt(),
+          apartment: response.data,
+        })
+        this.setFields(fields)
+        resolve(response)
       } catch (err) {
         reject(err)
       }

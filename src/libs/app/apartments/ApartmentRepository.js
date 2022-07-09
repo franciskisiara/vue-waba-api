@@ -1,6 +1,6 @@
 export const fields = {
   name: null,
-  flat_rate: null,
-  unit_rate: null,
-  flat_rate_limit: null,
+  flat_rate: 405,
+  unit_rate: 107,
+  flat_rate_limit: 4,
 }

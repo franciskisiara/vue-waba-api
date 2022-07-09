@@ -22,11 +22,11 @@ const routes = [
       }
     },
     children: [
-    //   {
-    //     path: 'register',
-    //     name: 'register',
-    //     component: () => import('@/components/auth/Register.vue'),
-    //   },
+      {
+        path: 'register',
+        name: 'register',
+        component: () => import('@/components/auth/Register.vue'),
+      },
 
       {
         path: 'login',

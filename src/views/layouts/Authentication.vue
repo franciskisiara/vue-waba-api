@@ -8,10 +8,10 @@
       md="3"
     >
       <v-card outlined class="rounded-xl">
-        <v-card-text class="px-5 py-10">
+        <v-card-text class="px-5 pt-10 pb-15">
           <div class="text-center">
             <v-avatar 
-              size="45"
+              size="60"
               tile
             >
               <img
