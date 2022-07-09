@@ -1,8 +1,8 @@
 <template>
   <v-form ref="form">
-    <div class="text-center">
+    <div class="text-center pt-5">
       <v-avatar 
-        size="128"
+        size="100"
         tile
       >
         <img
@@ -29,7 +29,7 @@
       <v-btn
         block
         x-large
-        class="body-2 font-weight-bold"
+        class="body-2 font-weight-bold rounded-lg"
         color="primary"
         @click="save()"
       >

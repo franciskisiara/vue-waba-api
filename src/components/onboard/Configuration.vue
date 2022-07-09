@@ -1,8 +1,8 @@
 <template>
   <v-form ref="form">
-    <div class="text-center">
+    <div class="text-center pt-5">
       <v-avatar 
-        size="128"
+        size="100"
         tile
       >
         <img

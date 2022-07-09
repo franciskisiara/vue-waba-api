@@ -1,22 +1,21 @@
 <template>
   <v-row 
-    class="app--full-height d-flex align-center justify-center"
+    class="app--full-height d-flex align-center justify-center curves"
   >
     <v-col cols="12" md="3">
-      <v-card 
-        flat
-        class="px-5"
-      >
-        <p class="text-h5 font-weight-bold primary--text">
-          Welcome, {{ user.name }}
-        </p>
+      <v-card outlined class="rounded-xl">
+        <v-card-text class="px-6 py-10">
+          <p class="text-h5 font-weight-bold primary--text">
+            Welcome, {{ user.username }}
+          </p>
 
-        <p class="body-1">
-          Let us help you set up in order to get started with waba quickly
-        </p>
+          <p class="body-1">
+            Let us help you set up in order to get started with waba quickly
+          </p>
 
-        <v-card-text class="px-0">
-          <router-view />
+          <div>
+            <router-view />
+          </div>
         </v-card-text>
       </v-card>
     </v-col>

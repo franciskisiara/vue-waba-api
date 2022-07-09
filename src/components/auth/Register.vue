@@ -29,10 +29,10 @@
         persistent-hint
         label="Username"
         class="rounded-lg"
-        v-model="authObj.phone"
+        v-model="authObj.username"
         :hint="errors.get('username')"
-        :error="errors.has('phone')"
-        @input="errors.clear('phone')"
+        :error="errors.has('username')"
+        @input="errors.clear('username')"
       ></v-text-field>
 
       <v-text-field
@@ -58,7 +58,7 @@
         :dark="!loading"
         :loading="loading"
         :disabled="loading"
-        @click="login()"
+        @click="register()"
       >
         Register
       </v-btn>
@@ -90,10 +90,10 @@ export default {
   },
 
   methods: {
-    login () {
+    register () {
       if (!this.loading) {
         this.loading = true
-        this.authObj.login()
+        this.authObj.register()
           .then(() => {
             this.authObj.retrieve('apartment')
               ? this.$router.push({name: 'dashboard'})

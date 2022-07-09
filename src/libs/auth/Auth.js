@@ -9,6 +9,20 @@ export default class Auth extends Base {
     this.app = process.env.VUE_APP_NAME
   }
 
+  register () {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const data = this.getFields(['name', 'username', 'password'])
+        let response = await this.form.submit('post', '/api/register', data)
+        this.encrypt(response.data)
+        this.setFields(fields)
+        resolve(response)
+      } catch (err) {
+        reject(err)
+      }
+    })
+  }
+
   login () {
     return new Promise(async (resolve, reject) => {
       try {
