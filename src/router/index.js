@@ -1,23 +1,66 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import HomeView from '../views/HomeView.vue'
 
 Vue.use(VueRouter)
 
 const routes = [
   {
-    path: '/',
-    name: 'home',
-    component: HomeView
+    path: '/auth',
+    component: () => import('@/views/layouts/Authentication.vue'),
+    // beforeEnter: (to, from, next) => {
+    //   if (!auth.retrieve('user')) {
+    //     next()
+    //   } else {
+    //     next('/')
+    //   }
+    // },
+    // children: [
+    //   {
+    //     path: 'register',
+    //     name: 'register',
+    //     component: () => import('@/components/auth/Register.vue'),
+    //   },
+
+    //   {
+    //     path: 'login',
+    //     name: 'login',
+    //     component: () => import('@/components/auth/Login.vue'),
+    //   },    
+    // ]
   },
-  {
-    path: '/about',
-    name: 'about',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
-  }
+
+  // {
+  //   path: '',
+  //   component: () => import('@/views/layouts/Application.vue'),
+  //   beforeEnter: (to, from, next) => {
+  //     if (!auth.retrieve('user')) {
+  //       next('/auth/login')
+  //     }
+  //     else {
+  //       next()
+  //     }
+  //   },
+  //   children: [
+  //     {
+  //       path: '/',
+  //       name: 'dashboard',
+  //       component: () => import('@/components/app/dashboard/Index.vue')
+  //     },
+
+  //     {
+  //       path: '/listings',
+  //       name: 'listings.index',
+  //       component: () => import('@/components/app/listings/Index.vue')
+  //     },
+
+  // //     // {
+  // //     //   path: '/profiles',
+  // //     //   name: 'knowledge-scales.index',
+  // //     //   component: () => import('@/components/app/knowledge_scales/Index.vue')
+  // //     // },
+  //   ]
+
+  // }
 ]
 
 const router = new VueRouter({
