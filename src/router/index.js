@@ -56,7 +56,12 @@ const routes = [
         path: 'apartment',
         name: 'onboarding-apartment',
         component: () => import('@/components/onboard/Apartment.vue'),
-      },  
+      }, 
+      {
+        path: 'configuration',
+        name: 'onboarding-configuration',
+        component: () => import('@/components/onboard/Configuration.vue'),
+      },   
     ]
   },
 

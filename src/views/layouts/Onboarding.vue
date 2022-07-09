@@ -2,7 +2,7 @@
   <v-row 
     class="app--full-height d-flex align-center justify-center"
   >
-    <v-col cols="12">
+    <v-col cols="12" md="3">
       <v-card 
         flat
         class="px-5"
