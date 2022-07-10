@@ -2,7 +2,7 @@
   <v-dialog
     v-if="house != null"
     v-model="dialog"
-    width="350"
+    width="380"
     persistent
   >
     <v-card>
@@ -62,10 +62,10 @@
           class="rounded-lg"
           suffix="UNITS"
           label="Meter reading"
-          v-model="tenancyObj.reading"
-          :hint="errors.get('reading')"
-          :error="errors.has('reading')"
-          @input="errors.clear('reading')"
+          v-model="tenancyObj.meter_reading"
+          :hint="errors.get('meter_reading')"
+          :error="errors.has('meter_reading')"
+          @input="errors.clear('meter_reading')"
         ></v-text-field>
       </v-card-text>
 

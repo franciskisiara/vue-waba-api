@@ -12,7 +12,7 @@ export default class Tenancy extends Base {
   store () {
     return new Promise(async (resolve, reject) => {
       try {
-        const data = this.getFields(['reading', 'tenant', 'house_id'])
+        const data = this.getFields(['meter_reading', 'tenant', 'house_id'])
         let response = await this.form.submit('post', `/api/apartments/${this.apartment.id}/tenancies`, data)
         this.setFields(fields)
         resolve(response)

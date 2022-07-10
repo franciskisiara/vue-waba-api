@@ -15,7 +15,7 @@
         dense
         outlined
         persistent-hint
-        label="Full name"
+        label="Name"
         class="rounded-lg"
         v-model="authObj.name"
         :hint="errors.get('name')"
@@ -27,7 +27,7 @@
         dense
         outlined
         persistent-hint
-        label="Username"
+        label="Phone"
         class="rounded-lg"
         v-model="authObj.username"
         :hint="errors.get('username')"

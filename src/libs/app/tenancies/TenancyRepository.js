@@ -1,5 +1,5 @@
 export const fields = {
-  reading: null,
+  meter_reading: null,
   house_id: null,
   tenant: {
     name: null,

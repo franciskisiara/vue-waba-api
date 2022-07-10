@@ -3,7 +3,7 @@
     <v-card-title>
        <div>
         <h1 class="text-h6 font-weight-bold text--darken-3">
-          Houses (Rooms)
+          Tenancies
         </h1>
         <app-crumbs 
           :crumbs="crumbs"
@@ -23,23 +23,40 @@
         class="mb-3 body-2" 
         hide-default-footer
         disable-pagination
+        disable-sort
         :headers="headers" 
         :items="houses.data"
       >
         <template v-slot:item.status="{ item }">
-          <v-icon
+          <v-btn
             v-if="item.tenant"
             color="#e74c3c"
+            class="ma-0"
+            icon
+            @click="evict(item)"
           >
-            mdi-lock
-          </v-icon>
+            <v-icon
+              color="#e74c3c"
+              small
+            >
+              mdi-lock
+            </v-icon>
+          </v-btn>
 
-          <v-icon
+          <v-btn
             v-if="!item.tenant"
             color="#2ecc71"
+            class="ma-0"
+            icon
+            @click="lease(item)"
           >
-            mdi-lock-open-variant
-          </v-icon>
+            <v-icon
+              color="#2ecc71"
+              small
+            >
+              mdi-lock-open-variant
+            </v-icon>
+          </v-btn>
         </template>
 
         <template v-slot:item.tenant_name="{ item }">
@@ -50,7 +67,7 @@
           {{ item.tenant? item.tenant.phone : 'n/a' }}
         </template>
 
-        <template v-slot:item.reading="{ item }">
+        <template v-slot:item.actions="{ item }">
           <v-btn
             dark
             label
@@ -103,6 +120,13 @@
       @closed="closed()"
       @leased="leased()"
     ></tenancies-create>
+
+    <tenancies-delete
+      :house="house"
+      :action="action"
+      @closed="closed()"
+      @leased="leased()"
+    ></tenancies-delete>
   </v-card>
 </template>
 
@@ -113,6 +137,7 @@ export default {
   components: {
     'houses-create': () => import('./Create.vue'),
     'tenancies-create': () => import('@/components/app/tenancies/Create.vue'),
+    'tenancies-delete': () => import('@/components/app/tenancies/Delete.vue'),
   },
 
   data () {
@@ -127,9 +152,7 @@ export default {
         { text: 'House number', value: 'house_number' },
         { text: 'Tenant name', value: 'tenant_name' },
         { text: 'Tenant phone', value: 'tenant_phone' },
-        { text: 'Meter reading', value: 'reading' },
-        { text: 'Lease (Move-In)', value: 'lease' },
-        { text: 'Evict (Move-Out)', value: 'evict' },
+        { text: 'Actions', value: 'actions' },
       ],
     }
   },
@@ -155,14 +178,13 @@ export default {
     },
 
     lease (house) {
-      if (house.tenant) {
-        flash({
-          message: `House ${house.house_number} is currently occupied.`
-        })
-        return
-      }
       this.house = house
       this.action = 'lease'
+    },
+
+    evict(house) {
+      this.house = house
+      this.action = 'evict'
     },
 
     closed () {
@@ -173,7 +195,7 @@ export default {
     leased () {
       this.closed()
       this.loadHouses()
-    }
+    },
   },
 
   mounted () {
