@@ -117,6 +117,7 @@ export default {
         this.loading = true
         this.apartmentObj.store()
           .then(() => {
+            localStorage.removeItem('apartment')
             this.$router.push({
               name: 'dashboard'
             })

@@ -39,27 +39,6 @@
           :error="errors.has('house_number')"
           @input="errors.clear('house_number')"
         ></v-text-field>
-
-        <!-- <v-text-field
-          dense
-          outlined
-          class="rounded-lg"
-          label="Meter reading"
-        ></v-text-field>
-
-        <v-text-field
-          dense
-          outlined
-          class="rounded-lg"
-          label="Tenant name"
-        ></v-text-field>
-
-        <v-text-field
-          dense
-          outlined
-          class="rounded-lg"
-          label="Tenant phone"
-        ></v-text-field> -->
       </v-card-text>
 
       <v-card-actions class="px-5 pb-5">
@@ -115,9 +94,7 @@ export default {
       this.houseObj.store()
         .then((response) => {
           flash(response)
-          // this.authObj.retrieve('apartment')
-          //   ? this.$router.push({name: 'dashboard'})
-          //   : this.$router.push({name: 'onboarding-apartment'})
+          this.$emit('stored')
         }).finally(() => {
           this.loading = false
         })

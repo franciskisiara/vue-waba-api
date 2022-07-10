@@ -31,6 +31,10 @@ export default {
   methods: {
     closed () {
       this.dialog = false
+    },
+
+    stored () {
+      this.$emit('stored')
     }
   }
 }

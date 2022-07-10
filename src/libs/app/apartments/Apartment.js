@@ -7,7 +7,6 @@ export default class Apartment extends Base {
   constructor () {
     super(fields);
     this.form = new Form(fields)
-    this.app = process.env.VUE_APP_NAME
   }
 
   store () {
