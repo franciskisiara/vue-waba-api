@@ -4,14 +4,6 @@
 
 @import 'resets';
 
-// html body #app > .__app-loading {
-//   display: none;
-// }
-
-// html {
-//   overflow-y: auto
-// }
-
 html body #app {
   margin: 0;
   padding: 0;
@@ -66,18 +58,6 @@ html body #app {
     .content-area {
       margin-top: 85px;
       padding: 0px 10px;
-      // margin-left: 300px;
     }
   }
-
-  // .curves {
-  //   .v-sheet {
-  //     border-radius: 10px;
-  //     box-shadow: 0 0 30px #ddd;
-
-  //     .no-radius {
-  //       border-radius: 0;
-  //     }
-  //   }
-  // }
 }
