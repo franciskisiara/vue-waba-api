@@ -2,7 +2,7 @@
   <v-form ref="form">
     <div class="text-center pt-5">
       <v-avatar 
-        size="100"
+        size="80"
         tile
       >
         <img
@@ -20,6 +20,7 @@
       </div>
      
       <v-text-field
+        dense
         outlined
         class="rounded-lg"
         :rules="rules"
@@ -28,7 +29,7 @@
 
       <v-btn
         block
-        x-large
+        large
         class="body-2 font-weight-bold rounded-lg"
         color="primary"
         @click="save()"

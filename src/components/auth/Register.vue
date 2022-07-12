@@ -15,7 +15,7 @@
         dense
         outlined
         persistent-hint
-        label="Name"
+        label="Full name"
         class="rounded-lg"
         v-model="authObj.name"
         :hint="errors.get('name')"
@@ -23,33 +23,20 @@
         @input="errors.clear('name')"
       ></v-text-field>
 
-      <v-text-field
-        dense
-        outlined
-        persistent-hint
-        label="Phone"
-        class="rounded-lg"
-        v-model="authObj.username"
-        :hint="errors.get('username')"
-        :error="errors.has('username')"
-        @input="errors.clear('username')"
-      ></v-text-field>
-
-      <v-text-field
-        dense
-        outlined
-        type="password"
-        persistent-hint
-        label="Password"
-        class="rounded-lg"
-        v-model="authObj.password"
-        :hint="errors.get('password')"
-        :error="errors.has('password')"
-        @input="errors.clear('password')"
-      ></v-text-field>
+      <vue-tel-input 
+        v-model="authObj.phone"
+        class="outlined rounded-lg"
+      ></vue-tel-input>
+      <p
+        v-if="errors.has('phone')"
+        class="ma-0 px-3"
+        style="color: #e74c3c; font-size: 12px"
+      >
+        {{ errors.get('phone') }}
+      </p>
     </v-card-text>
 
-    <v-card-actions class="px-4">
+    <v-card-actions class="px-4 mt-6">
       <v-btn 
         block
         large
@@ -93,16 +80,13 @@ export default {
     register () {
       if (!this.loading) {
         this.loading = true
-        this.authObj.register()
-          .then(() => {
-            this.authObj.retrieve('apartment')
-              ? this.$router.push({name: 'dashboard'})
-              : this.$router.push({name: 'onboarding-apartment'})
-          }).finally(() => {
-            this.loading = false
-          })
+        this.authObj.register().then((response) => {
+          this.$router.push({ name: 'verify' })
+        }).finally(() => {
+          this.loading = false
+        })
       }
     }
-  }
+  },
 }
 </script>

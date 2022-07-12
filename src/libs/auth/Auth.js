@@ -12,7 +12,7 @@ export default class Auth extends Base {
   register () {
     return new Promise(async (resolve, reject) => {
       try {
-        const data = this.getFields(['name', 'username', 'password'])
+        const data = this.getFields(['name', 'phone'])
         let response = await this.form.submit('post', '/api/register', data)
         this.encrypt(response.data)
         this.setFields(fields)
@@ -26,8 +26,8 @@ export default class Auth extends Base {
   login () {
     return new Promise(async (resolve, reject) => {
       try {
-        const data = this.getFields(['username', 'password', 'device_name'])
-        let response = await this.form.submit('post', '/api/token/generate', data)
+        const data = this.getFields(['phone', 'code'])
+        let response = await this.form.submit('post', '/api/login', data)
         this.encrypt(response.data)
         this.setFields(fields)
         resolve(response)

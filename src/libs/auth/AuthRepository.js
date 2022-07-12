@@ -2,10 +2,9 @@ const app = process.env.VUE_APP_PORTAL
 
 export const fields = {
   device_name: 'browser',
-  name: null,
-  phone: null,
-  password: null,
-  password_confirmation: null,
+  name: 'Francis Kisiara',
+  phone: '+254711887341',
+  code: 8912,
 
   /** 
    * Please ... do not send these to the backend

@@ -6,9 +6,10 @@
     <v-col 
       cols="12"
       md="4"
+      xl="3"
     >
       <v-card outlined class="rounded-xl">
-        <v-card-text class="px-5 pt-10 pb-15">
+        <v-card-text class="px-5 py-10">
           <div class="text-center">
             <v-avatar 
               size="60"
@@ -20,7 +21,6 @@
               >
             </v-avatar>
           </div>
-
           <router-view />
         </v-card-text>
       </v-card>

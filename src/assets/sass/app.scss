@@ -25,6 +25,31 @@ html body #app {
     .app--full-height {
       height: 100%;
     }
+
+    .vue-tel-input {
+      border-width: 1px;
+      &:focus-within {
+
+      box-shadow: none;
+      border-color: #3BACB6;
+      }
+    }
+
+    .vue-tel-input {
+      ul {
+        padding-left: 0px;
+      }
+    }
+
+    .vti__dropdown-item {
+      padding: 8px 15px;
+  }
+
+    .vti__input {
+      height: 40px;
+      
+     
+    }
   }
 
   .drawer-logo {
