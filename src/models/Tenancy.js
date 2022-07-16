@@ -26,4 +26,15 @@ export default class Tenancy extends Base {
       }
     })
   }
+
+  destroy (tenancyId) {
+    return new Promise(async (resolve, reject) => {
+      try {
+        let response = await this.form.submit('delete', `/api/apartments/${this.apartment.id}/tenancies/${tenancyId}`)
+        resolve(response)
+      } catch (err) {
+        reject(err)
+      }
+    })
+  }
 }

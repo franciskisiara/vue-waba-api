@@ -1,21 +1,31 @@
 <template>
   <v-dialog
-    v-if="dialog"
     v-model="dialog"
     width="380"
     persistent
   >
+    <template v-slot:activator="{ on, attrs }">
+      <v-btn
+        color="primary"
+        class="rounded-lg body-2 ttn"
+        v-bind="attrs"
+        v-on="on"
+      >
+        Record reading
+      </v-btn>
+    </template>
+
     <v-card>
       <v-card-title>
         <h2 class="text-subtitle-1 font-weight-bold">
-          Add a tenant
+          Record a meter reading
         </h2>
         <v-spacer></v-spacer>
         <v-btn
           icon
           small
           color="red"
-          @click="$emit('closed')"
+          @click="dialog = false"
         >
           <v-icon 
             small 
@@ -33,27 +43,19 @@
           dense
           outlined
           persistent-hint
+          min="0"
+          step=".01"
+          type="number"
+          suffix="UNITS"
           class="rounded-lg"
-          label="Tenant name"
-          v-model="tenancyObj.tenant.name"
-          :hint="errors.get('tenant.name')"
-          :error="errors.has('tenant.name')"
-          @input="errors.clear('tenant.name')"
+          label="Meter reading"
+          v-model="meterReadingObj.meter_reading"
+          :hint="errors.get('meter_reading')"
+          :error="errors.has('meter_reading')"
+          @input="errors.clear('meter_reading')"
         ></v-text-field>
+        <!-- 
 
-        <div class="mb-7">
-          <vue-tel-input 
-            class="outlined rounded-lg"
-            v-model="tenancyObj.tenant.phone"
-          ></vue-tel-input>
-          <p
-            v-if="errors.has('tenant.phone')"
-            class="ma-0 px-3"
-            style="color: #e74c3c; font-size: 12px; position: absolute;"
-          >
-            {{ errors.get('tenant.phone') }}
-          </p>
-        </div>
 
         <v-text-field
           dense
@@ -69,7 +71,7 @@
           :hint="errors.get('meter_reading')"
           :error="errors.has('meter_reading')"
           @input="errors.clear('meter_reading')"
-        ></v-text-field>
+        ></v-text-field> -->
       </v-card-text>
 
       <v-card-actions class="px-5 pb-5">
@@ -84,7 +86,7 @@
           :disabled="loading"
           @click="submit()"
         >
-          Add Tenancy Details
+          Record reading details
         </v-btn>
       </v-card-actions>
     </v-card>
@@ -92,36 +94,20 @@
 </template>
 
 <script>
-import * as _ from 'lodash'
-import Tenancy from '@/models/Tenancy'
+import MeterReading from '@/models/MeterReading'
 
 export default {
-  props: [
-    'house',
-    'action'
-  ],
-
   data () {
     return {
       dialog: false,
       loading: false,
-      houseSearch: '',
-      tenancyObj: new Tenancy()
+      meterReadingObj: new MeterReading()
     }
-  },
-
-  watch: {
-    house (house) {
-      if (house) {
-        this.tenancyObj.house_id = house.id
-      }
-      this.dialog = Boolean(house) && this.action == 'board'
-    },
   },
 
   computed: {
     errors () {
-      return this.tenancyObj.form.errors
+      return this.meterReadingObj.form.errors
     }
   },
 
@@ -129,14 +115,12 @@ export default {
     submit () {
       if (!this.loading) {
         this.loading = true
-        this.tenancyObj.store().then((response) => {
-          flash(response)
-          this.$emit('stored')
-        }).finally(() => {
-          this.loading = false
-        })
+        this.meterReadingObj.store()
+          .finally(() => {
+            this.loading = false
+          })
       }
-    },
+    }
   },
 }
 </script>

@@ -39,29 +39,11 @@ export const appRoutes = () => ([
         component: () => import('@/components/app/dashboard/Index.vue')
       },
 
-      // {
-      //   path: 'tenancies',
-      //   name: 'tenancies.index',
-      //   component: () => import('@/components/app/tenancies/Index.vue')
-      // },
-
-      // {
-      //   path: '/settings',
-      //   component: () => import('@/components/app/Settings.vue'),
-      //   children: [
-      //     {
-      //       path: 'houses',
-      //       name: 'houses.index',
-      //       component: () => import('@/components/app/houses/Index.vue')
-      //     },
-
-      //     {
-      //       path: 'pricing',
-      //       name: 'pricing',
-      //       component: () => import('@/components/app/pricing/Index.vue')
-      //     },
-      //   ]
-      // },
+      {
+        path: '/readings',
+        name: 'readings.index',
+        component: () => import('@/components/app/readings/Index.vue')
+      },
     ]
   }
 ])

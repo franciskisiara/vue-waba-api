@@ -26,54 +26,26 @@ html body #app {
       }
     }
   }
-  // margin: 0;
-  // padding: 0;
-  // min-height: 600px;
-  // height: 100%;
-  // background-color: #fff;
 
- 
+  .vue-tel-input {
+    border-width: 1px;
+    &:focus-within {
+      box-shadow: none;
+      border-color: #3bacb6;
+    }
 
-  // .app-content {
-  //   height: 100%;
-  //   padding: 0px;
+    ul {
+      padding-left: 0px;
+    }
+  }
 
-   
+  .vti__dropdown-item {
+    padding: 8px 15px;
+  }
 
-  // //   .vue-tel-input {
-  // //     border-width: 1px;
-  // //     &:focus-within {
-  // //       box-shadow: none;
-  // //       border-color: #3bacb6;
-  // //     }
-  // //   }
-
-  // //   .vue-tel-input {
-  // //     ul {
-  // //       padding-left: 0px;
-  // //     }
-  // //   }
-
-  // //   .vti__dropdown-item {
-  // //     padding: 8px 15px;
-  // //   }
-
-  // //   .vti__input {
-  // //     height: 40px;
-  // //   }
-  // }
-
-  // .drawer-logo {
-  //   height: 100px;
-  //   text-align: center;
-  //   font-size: 40px;
-  // }
-
-  // .app--main-content {
-  // //   // padding: 0px;
-  // //   height: 100%;
-  // //   width: 100%;
-  // }
+  .vti__input {
+    height: 40px;
+  }
 }
 
 @import 'mobile';

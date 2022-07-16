@@ -8,9 +8,8 @@
     style="border-bottom: 1px solid #ddd"
   >
     <v-toolbar-title>
-      <router-link 
+      <div
         class="ma-0 mr-5 body-1 font-weight-bold secondary--text"
-        to="/settings/houses"
       >
         <v-avatar 
           size="30"
@@ -21,7 +20,7 @@
             alt="Logo"
           >
         </v-avatar> {{ apartment.name }}
-      </router-link>
+      </div>
     </v-toolbar-title>
 
     <div class="links hidden-sm-and-down"> 
@@ -38,6 +37,16 @@
     </div>
     
     <v-spacer></v-spacer>
+
+    <v-btn 
+      icon
+      small
+      @click="search()"
+    >
+      <v-icon small>
+        mdi-magnify
+      </v-icon>
+    </v-btn>
 
     <v-avatar
       v-if="user.avatar"
@@ -80,9 +89,9 @@ export default {
   data () {
     return {
       links: [        
-        // { title: 'Readings', icon: 'mdi-gauge', to: '/readings' },
-        // { title: 'Payments', icon: 'mdi-gauge', to: '/readings' },
-        // { title: 'Settings', icon: 'mdi-home-group', to: '/tenancies' },
+        { title: 'Dashboard', icon: 'mdi-home-group', to: '/' },
+        { title: 'Readings', icon: 'mdi-gauge', to: '/readings' },
+        // { title: 'Payments', icon: 'mdi-gauge', to: '/payments' },
       ]
     }
   },  
