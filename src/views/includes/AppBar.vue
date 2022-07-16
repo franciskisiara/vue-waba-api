@@ -79,9 +79,7 @@ import vault from '@/libs/core/vault'
 export default {
   data () {
     return {
-      links: [
-        // { title: 'Dashboard', icon: 'mdi-google-analytics', to: '/' },
-        
+      links: [        
         { title: 'Readings', icon: 'mdi-gauge', to: '/readings' },
         { title: 'Payments', icon: 'mdi-gauge', to: '/readings' },
         { title: 'Settings', icon: 'mdi-home-group', to: '/tenancies' },
