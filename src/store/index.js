@@ -1,26 +1,24 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import Apix from './Apix';
+import apix from './apix';
 
 Vue.use(Vuex);
 
-let apix = new Apix();
-
 const store = new Vuex.Store({
   state: {
-    ...apix.getState(),
+    ...apix.state,
   },
 
   getters: {
-    ...apix.getGetters(),
-  },
-
-  mutations: {
-    ...apix.getMutations(),
+    ...apix.getters,
   },
 
   actions: {
-    ...apix.getActions(),
+    ...apix.actions,
+  },
+
+  mutations: {
+    ...apix.mutations,
   },
 });
 
