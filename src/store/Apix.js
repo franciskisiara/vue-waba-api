@@ -1,7 +1,7 @@
 import { resources, helpers } from './resources'
 import UrlAction from "./UrlAction"
 import axios from 'axios'
-import Auth  from '@/libs/auth/Auth'
+import vault from '@/libs/core/vault'
 
 export default class Apix {
   constructor () {
@@ -64,14 +64,15 @@ export default class Apix {
             headers: {
               'Accept': 'application/json',
               'Content-Type': 'application/json',
-              'Authorization': `Bearer ${(new Auth()).retrieve('token')}`
+              'Authorization': `Bearer ${vault.extract('token')}`
             }
-          }).then(({data}) => {
-            context.commit(functionName, data)
-            resolve(data)
-          }).catch(error => {
-            reject(error)
           })
+            .then(({data}) => {
+              context.commit(functionName, data)
+              resolve(data)
+            }).catch(error => {
+              reject(error)
+            })
         })
       }
     })

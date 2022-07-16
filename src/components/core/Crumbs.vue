@@ -27,7 +27,7 @@ export default {
   computed: {
     heel () {
       return {
-        text: 'Home',
+        text: 'Dashboard',
         disabled: false,
         to: '/',
       }

@@ -6,35 +6,35 @@
           Sign in
         </h1>
         <p class="body-1">
-          Access your caretaker account
+          Log into your caretaker account
         </p>
       </div>
     </v-card-title>
     <v-card-text>
-      <v-text-field
-        dense
-        outlined
-        persistent-hint
-        label="Username"
-        class="rounded-lg"
-        v-model="authObj.username"
-        :hint="errors.get('username')"
-        :error="errors.has('username')"
-        @input="errors.clear('username')"
-      ></v-text-field>
+      <div class="mb-7">
+        <vue-tel-input 
+          :disabled="Boolean(user)"
+          v-model="authObj.phone"
+          class="outlined rounded-lg"
+        ></vue-tel-input>
+        <p
+          v-if="errors.has('phone')"
+          class="ma-0 px-3"
+          style="color: #e74c3c; font-size: 12px; position: absolute;"
+        >
+          {{ errors.get('phone') }}
+        </p>
+      </div>
 
-      <v-text-field
-        dense
-        outlined
-        type="password"
-        persistent-hint
-        label="Password"
-        class="rounded-lg"
-        v-model="authObj.password"
-        :hint="errors.get('password')"
-        :error="errors.has('password')"
-        @input="errors.clear('password')"
-      ></v-text-field>
+      <Transition name="slide-fade">
+        <auth-verify
+          v-if="user"
+          :model="authObj"
+          :errors="errors"
+          @coded="coded"
+          @clear="errors.clear('code')"
+        ></auth-verify>
+      </Transition>
     </v-card-text>
 
     <v-card-actions class="px-4">
@@ -46,26 +46,50 @@
         :dark="!loading"
         :loading="loading"
         :disabled="loading"
-        @click="login()"
+        @click="submit()"
       >
-        Log in
+        {{ user ? 'Log in' : 'Generate code' }}
       </v-btn>
     </v-card-actions>
 
+    <v-card-text class="pb-0" v-if="user">
+      <v-btn 
+        text
+        block
+        color="secondary"
+        class="ttn body-2 mt-n1 px-2"
+        @click="authObj.logout()"
+      >
+        Not {{ user.name }}? 
+      </v-btn>
+    </v-card-text>
+
     <v-card-text class="pb-0">
       <p class="body-1 text-center">
-        Dont have an account? <router-link to="/auth/register" class="font-weight-bold">Register</router-link>
+        Dont have an account? 
+        <router-link 
+          to="/auth/register" 
+          class="font-weight-bold"
+        >
+          Register
+        </router-link>
       </p>
     </v-card-text>
   </v-card>
 </template>
 
 <script>
-import Auth from '@/libs/auth/Auth'
+import Auth from '@/models/Auth'
+import vault from '@/libs/core/vault'
 
 export default {
+  components: {
+    'auth-verify': () => import('./partials/Verify.vue')
+  },
+
   data () {
     return {
+      user: null,
       loading: false,
       authObj: new Auth(),
     }
@@ -78,19 +102,41 @@ export default {
   },
 
   methods: {
-    login () {
+    coded (code) {
+      this.authObj.code = code
+    },
+
+    submit () {
       if (!this.loading) {
         this.loading = true
-        this.authObj.login()
-          .then(() => {
-            this.authObj.retrieve('apartment')
-              ? this.$router.push({name: 'dashboard'})
-              : this.$router.push({name: 'onboarding-apartment'})
-          }).finally(() => {
-            this.loading = false
-          })
+        this.user 
+          ? this.login()
+          : this.generateCode() 
       }
+    },
+
+    generateCode () {
+      this.authObj.generateCode().then(({ data }) => {
+        this.user = data.user
+      }).finally(() => {
+        this.loading = false
+      })
+    },
+
+    login () {
+      this.authObj.login().then(() => {
+        vault.extract('apartment')
+          ? this.$router.push({name: 'dashboard'})
+          : this.$router.push({name: 'onboarding'})
+      }).finally(() => {
+        this.loading = false
+      })
     }
+  },
+
+  mounted () {
+    this.user = vault.extract('user')
+    this.authObj.phone = this.user ? this.user.phone : ''
   }
 }
 </script>

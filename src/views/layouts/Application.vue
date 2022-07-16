@@ -1,26 +1,16 @@
 <template>
-  <div class="app--full-height">
-    <!-- <app-drawer /> -->
-
-    <v-container 
-      class="app--main-content" 
-      fluid
-    >
-      <app-bar />
-
-      <div class="content-area">
-        <router-view />
-      </div>
-    </v-container>
-  </div>
+  <v-main>
+    <app-bar />
+    <router-view />
+    <app-nav class="hidden-md-and-up" />
+  </v-main>
 </template>
 
 <script>
 export default {
    components: {
-    'app-drawer': () => import('@/views/includes/AppDrawer.vue'),
+    'app-nav': () => import('@/views/includes/AppNav.vue'),
     'app-bar': () => import('@/views/includes/AppBar.vue'),
   },
-
 }
 </script>

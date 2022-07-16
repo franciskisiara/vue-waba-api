@@ -1,6 +1,6 @@
-import Errors from './Errors'
 import axios from 'axios'
-import Auth from '@/libs/auth/Auth'
+import Errors from '@/libs/core/Errors'
+import vault from '@/libs/core/vault'
 
 export default class Form {
   constructor (fields) {
@@ -8,19 +8,17 @@ export default class Form {
     this.errors = new Errors(fields)
   }
 
-  submit (method, url, data) {
+  submit (method, url, data = {}) {
     return new Promise((resolve, reject) => {
-      const token = (new Auth()).retrieve('token')
-      axios({ 
+      axios({
+        baseURL: process.env.VUE_APP_WABA_API,
         method, 
         url, 
-        data, 
-        // withCredentials: true,
-        baseURL: process.env.VUE_APP_WABA_API,
+        data,
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`
+          'Authorization': `Bearer ${vault.extract('token')}`
         }
       })
         .then(({ data }) => {

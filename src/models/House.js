@@ -1,13 +1,13 @@
 import Base from '@/libs/core/Base'
-import Form from '@/libs/core/Form'
-import { fields } from './HouseRepository'
+import vault from '@/libs/core/vault'
+
+const fields = {
+  house_number: null,
+}
 
 export default class House extends Base {
   constructor () {
-    super(fields);
-    this.form = new Form(fields)
-    this.app = process.env.VUE_APP_NAME
-    this.apartment = auth.retrieve('apartment')
+    super(fields)
   }
 
   store () {

@@ -1,63 +1,79 @@
-@import url('https://fonts.googleapis.com/css?family=Nunito|Mali:wght@700');
+@import url("https://fonts.googleapis.com/css?family=Nunito|Mali:wght@700|Fuzzy+Bubbles:wght@700");
 
-@import '~vuetify/src/styles/styles.sass';
+@import "~vuetify/src/styles/styles.sass";
 
-@import 'resets';
+@import "resets";
 
 html body #app {
-  margin: 0;
-  padding: 0;
-  min-height: 720px;
-  background-color: #fff;
-
-  .app-content {
+  .app--full-height {
     height: 100%;
-    padding: 0px;
+  }
 
-    .app--full-height {
-      height: 100%;
-    }
+  .text--logo {
+    font-family: "Fuzzy Bubbles";
+    font-weight: 700;
+    font-size: 22px;
+    color: #3bacb6;
+    margin-bottom: 5px;
+  }
 
-    .vue-tel-input {
-      border-width: 1px;
-      &:focus-within {
-
-      box-shadow: none;
-      border-color: #3BACB6;
+  .links {
+    a.active {
+      color: #3bacb6;
+      font-weight: bold;
+      &:before {
+        background-color: transparent;
       }
     }
-
-    .vue-tel-input {
-      ul {
-        padding-left: 0px;
-      }
-    }
-
-    .vti__dropdown-item {
-      padding: 8px 15px;
   }
+  // margin: 0;
+  // padding: 0;
+  // min-height: 600px;
+  // height: 100%;
+  // background-color: #fff;
 
-    .vti__input {
-      height: 40px;
-      
-     
-    }
-  }
+ 
 
-  .drawer-logo {
-    height: 100px;
-    text-align: center;
-    font-size: 40px;
-  }
+  // .app-content {
+  //   height: 100%;
+  //   padding: 0px;
 
-  .app--main-content {
-    padding: 0px;
-    height: 100%;
-    width: 100%;
+   
 
-    .content-area {
-      margin-top: 85px;
-      padding: 0px 10px;
-    }
-  }
+  // //   .vue-tel-input {
+  // //     border-width: 1px;
+  // //     &:focus-within {
+  // //       box-shadow: none;
+  // //       border-color: #3bacb6;
+  // //     }
+  // //   }
+
+  // //   .vue-tel-input {
+  // //     ul {
+  // //       padding-left: 0px;
+  // //     }
+  // //   }
+
+  // //   .vti__dropdown-item {
+  // //     padding: 8px 15px;
+  // //   }
+
+  // //   .vti__input {
+  // //     height: 40px;
+  // //   }
+  // }
+
+  // .drawer-logo {
+  //   height: 100px;
+  //   text-align: center;
+  //   font-size: 40px;
+  // }
+
+  // .app--main-content {
+  // //   // padding: 0px;
+  // //   height: 100%;
+  // //   width: 100%;
+  // }
 }
+
+@import 'mobile';

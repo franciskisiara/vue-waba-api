@@ -4,7 +4,6 @@
     :right="true"
     :value="show"
     :timeout="timeout"
-    multi-line
   >
     {{ body }}
     <v-btn

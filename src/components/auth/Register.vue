@@ -23,20 +23,22 @@
         @input="errors.clear('name')"
       ></v-text-field>
 
-      <vue-tel-input 
-        v-model="authObj.phone"
-        class="outlined rounded-lg"
-      ></vue-tel-input>
-      <p
-        v-if="errors.has('phone')"
-        class="ma-0 px-3"
-        style="color: #e74c3c; font-size: 12px"
-      >
-        {{ errors.get('phone') }}
-      </p>
+      <div class="mb-7">
+        <vue-tel-input 
+          v-model="authObj.phone"
+          class="outlined rounded-lg"
+        ></vue-tel-input>
+        <p
+          v-if="errors.has('phone')"
+          class="ma-0 px-3"
+          style="color: #e74c3c; font-size: 12px"
+        >
+          {{ errors.get('phone') }}
+        </p>
+      </div>
     </v-card-text>
 
-    <v-card-actions class="px-4 mt-6">
+    <v-card-actions class="px-4">
       <v-btn 
         block
         large
@@ -53,14 +55,21 @@
 
     <v-card-text class="pb-0">
       <p class="body-1 text-center">
-        Already have an account? <router-link to="/auth/login" class="font-weight-bold">Login</router-link>
+        Already have an account? 
+
+        <router-link 
+          to="/auth/login" 
+          class="font-weight-bold"
+        >
+          Login
+        </router-link>
       </p>
     </v-card-text>
   </v-card>
 </template>
 
 <script>
-import Auth from '@/libs/auth/Auth'
+import Auth from '@/models/Auth'
 
 export default {
   data () {
@@ -73,15 +82,16 @@ export default {
   computed: {
     errors () {
       return this.authObj.form.errors
-    }
+    },
   },
 
   methods: {
     register () {
       if (!this.loading) {
         this.loading = true
-        this.authObj.register().then((response) => {
-          this.$router.push({ name: 'verify' })
+        this.authObj.register().then(({ data }) => {
+          this.user = data.user
+          this.$router.push({ name: 'login' })
         }).finally(() => {
           this.loading = false
         })

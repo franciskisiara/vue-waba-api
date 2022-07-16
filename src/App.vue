@@ -1,9 +1,8 @@
 <template>
-  <v-app id="app"> 
-    <!-- Global flash component -->
+  <v-app> 
     <app-flash details=""></app-flash>
     
-    <v-container class="app-content">
+    <v-container class="app--full-height">
       <router-view></router-view>
     </v-container>
   </v-app>

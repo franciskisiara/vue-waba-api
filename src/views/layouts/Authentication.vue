@@ -8,11 +8,15 @@
       md="4"
       xl="3"
     >
-      <v-card outlined class="rounded-xl">
+      <v-card outlined class="rounded-xl mask">
         <v-card-text class="px-5 py-10">
           <div class="text-center">
+            <p class="text--logo">
+              WABA
+            </p>
+
             <v-avatar 
-              size="60"
+              size="52"
               tile
             >
               <img

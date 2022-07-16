@@ -1,36 +1,45 @@
-@import 'variables';
+@import "variables";
 
 html body #app {
   font-family: $body-font-family;
   color: #333;
 
-  .caption, .body-1, .body-2, .text-h6, .text-h5, .text-h4, .text-h3,
-  .v-label, .text-subtitle-1,
-  input, button {
+  .caption,
+  .body-1,
+  .body-2,
+  .text-h6,
+  .text-h5,
+  .text-h4,
+  .text-h3,
+  .v-label,
+  .text-subtitle-1,
+  input,
+  button {
     font-family: $body-font-family;
   }
 
-  .v-text-field__prefix, .v-text-field__suffix {
+  .v-text-field__prefix,
+  .v-text-field__suffix {
     font-size: 12px;
     font-weight: bold;
     font-family: $body-font-family;
   }
 
-  .error--text{
-    .v-messages__message{
+  .error--text {
+    .v-messages__message {
       color: #e74c3c !important;
     }
   }
 
   .v-list .v-list-item--active {
-    color: #3BACB6 !important;
+    color: #3bacb6 !important;
   }
 
   a {
     text-decoration: none;
   }
 
-  .ttn { 
-    text-transform: none !important
+  .ttn {
+    text-transform: none !important;
   }
 }

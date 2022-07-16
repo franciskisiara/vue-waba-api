@@ -1,10 +1,6 @@
-import Vue from 'vue';
-import Auth from '@/libs/auth/Auth'
+import Vue from 'vue'
 
-window.auth = new Auth()
-window.events = new Vue();
-window.flash = function(details){
-  window.events.$emit('flash', details);
-};
-
-// window.axios = require('axios');
+window.events = new Vue()
+window.flash = (details) => {
+  window.events.$emit('flash', details)
+}

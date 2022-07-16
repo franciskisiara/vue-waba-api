@@ -1,18 +1,23 @@
 import Base from '@/libs/core/Base'
-import Form from '@/libs/core/Form'
-import { fields } from './TenancyRepository'
+
+const fields = {
+  meter_reading: null,
+  house_number: null,
+  tenant: {
+    name: null,
+    phone: null,
+  },
+}
 
 export default class Tenancy extends Base {
   constructor () {
-    super(fields);
-    this.form = new Form(fields)
-    this.apartment = auth.retrieve('apartment')
+    super(fields)
   }
 
   store () {
     return new Promise(async (resolve, reject) => {
       try {
-        const data = this.getFields(['meter_reading', 'tenant', 'house_id'])
+        const data = this.getFields(['meter_reading', 'tenant', 'house_number'])
         let response = await this.form.submit('post', `/api/apartments/${this.apartment.id}/tenancies`, data)
         this.setFields(fields)
         resolve(response)

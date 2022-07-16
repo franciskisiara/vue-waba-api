@@ -1,12 +1,16 @@
 import Base from '@/libs/core/Base'
-import Form from '@/libs/core/Form'
-import { fields } from './AuthRepository'
+import vault from '@/libs/core/vault'
+
+const fields = {
+  device_name: 'browser',
+  name: '',
+  phone: '',
+  code: '',   
+}
 
 export default class Auth extends Base {
   constructor () {
-    super(fields);
-    this.form = new Form(fields)
-    this.app = process.env.VUE_APP_PORTAL
+    super(fields)
   }
 
   register () {
@@ -14,8 +18,20 @@ export default class Auth extends Base {
       try {
         const data = this.getFields(['name', 'phone'])
         let response = await this.form.submit('post', '/api/register', data)
-        this.encrypt(response.data)
-        this.setFields(fields)
+        vault.insert(response.data)
+        resolve(response)
+      } catch (err) {
+        reject(err)
+      }
+    })
+  }
+
+  generateCode () {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const data = this.getFields(['phone',])
+        let response = await this.form.submit('post', '/api/code/generate', data)
+        vault.insert(response.data)
         resolve(response)
       } catch (err) {
         reject(err)
@@ -28,8 +44,7 @@ export default class Auth extends Base {
       try {
         const data = this.getFields(['phone', 'code'])
         let response = await this.form.submit('post', '/api/login', data)
-        this.encrypt(response.data)
-        this.setFields(fields)
+        vault.insert(response.data)
         resolve(response)
       } catch (err) {
         reject(err)
@@ -38,11 +53,7 @@ export default class Auth extends Base {
   }
 
   logout () {
-    /** @todo - add call to API to expire the token */
-    localStorage.removeItem(this.app)
-    location.href='/auth/login'
-    flash({
-      message: 'Successfully logged out'
-    })
+    vault.destroy()
+    location.href = '/auth/login'
   }
 }

@@ -61,7 +61,7 @@
 </template>
 
 <script>
-import House from '@/libs/app/houses/House'
+import House from '@/models/House'
 
 export default {
   props: [

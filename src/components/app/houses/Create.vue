@@ -5,7 +5,7 @@
       class="rounded-lg body-2 ttn"
       @click="dialog = true"
     >
-      Add a house
+      Add house
     </v-btn>
 
     <house-form

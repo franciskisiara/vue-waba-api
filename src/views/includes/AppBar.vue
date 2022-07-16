@@ -8,7 +8,10 @@
     style="border-bottom: 1px solid #ddd"
   >
     <v-toolbar-title>
-      <div class="ma-0 text-h6 font-weight-bold secondary--text">
+      <router-link 
+        class="ma-0 mr-5 body-1 font-weight-bold secondary--text"
+        to="/settings/houses"
+      >
         <v-avatar 
           size="30"
           tile
@@ -18,14 +21,27 @@
             alt="Logo"
           >
         </v-avatar> {{ apartment.name }}
-      </div>
+      </router-link>
     </v-toolbar-title>
 
+    <div class="links hidden-sm-and-down"> 
+      <v-btn
+        v-for="link, i in links"
+        :key="`link-${i}`"
+        :to="link.to"
+        active-class="active"
+        class="ttn body-2"
+        text
+      >
+        {{ link.title }}
+      </v-btn>
+    </div>
+    
     <v-spacer></v-spacer>
 
     <v-avatar
       v-if="user.avatar"
-      size="34"
+      size="30"
       class="white--text mx-1"
     >
       <img
@@ -36,9 +52,9 @@
 
     <v-avatar
       v-else
-      size="34"
+      size="30"
       color="secondary"
-      class="white--text mx-1"
+      class="white--text mx-1 body-2"
     >
       {{ user.name.charAt(0) }}
     </v-avatar>
@@ -58,15 +74,28 @@
 </template>
 
 <script>
+import vault from '@/libs/core/vault'
+
 export default {
+  data () {
+    return {
+      links: [
+        // { title: 'Dashboard', icon: 'mdi-google-analytics', to: '/' },
+        { title: 'Tenancies', icon: 'mdi-home-group', to: '/tenancies' },
+        // { title: 'Readings', icon: 'mdi-gauge', to: '/readings' },
+      ]
+    }
+  },  
+
   computed: {
-    user: () => auth.retrieve('user'),
-    apartment: () => auth.retrieve('apartment'),
+    user: () => vault.extract('user'),
+    apartment: () => vault.extract('apartment'),
   },
 
   methods: {
     logout () {
-      auth.logout()
+      vault.destroy()
+      location.href = '/auth/login' 
     }
   }
 }
