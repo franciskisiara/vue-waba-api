@@ -31,6 +31,7 @@
           <v-icon 
             small 
             color="red"
+            @click="dialog = false"
           >
             mdi-close
           </v-icon>
@@ -40,20 +41,23 @@
       <v-divider class="mb-5"></v-divider>
 
       <v-card-text>
-        <v-combobox
+        <v-autocomplete
           dense
           outlined
+          no-filter
+          clearable
           persistent-hint
-          label="House no."
           class="rounded-lg"
+          label="House number."
           item-text="house_number"
-          item-value="house_number"
+          item-value="id"
           :items="houses.data"
-          v-model="tenancyObj.house_number"
-          :hint="errors.get('house_number')"
-          :error="errors.has('house_number')"
-          @change="errors.clear('house_number')"
-        ></v-combobox>
+          v-model="tenancyObj.house_id"
+          :search-input.sync="houseSearch"
+          :hint="errors.get('house_id')"
+          :error="errors.has('house_id')"
+          @change="errors.clear('house_id')"
+        ></v-autocomplete>
 
         <v-text-field
           dense
@@ -118,6 +122,7 @@
 </template>
 
 <script>
+import * as _ from 'lodash'
 import vault from '@/libs/core/vault'
 import Tenancy from '@/models/Tenancy'
 import { mapActions, mapGetters } from 'vuex'
@@ -132,15 +137,22 @@ export default {
     return {
       dialog: false,
       loading: false,
+      houseSearch: '',
       tenancyObj: new Tenancy()
     }
   },
 
-  // watch: {
-  //   house (house) {
-  //     this.dialog = Boolean(house) && this.action == 'lease'
-  //   }
-  // },
+  watch: {
+    houseSearch (n, o) {
+      if (n && n.length > 1) {
+        this.loadHouses(n);
+      }
+
+      if (o && !n) {
+        this.loadHouses();
+      }
+    },
+  },
 
   computed: {
     ...mapGetters({
@@ -157,14 +169,24 @@ export default {
       'setHouses'
     ]),
 
-    verifyHouseExistance (e) {
-      console.log(e)
+    loadHouses (search = null) {
+      this.setHouses({
+        routes: {
+          apartment: vault.extract('apartment').id
+        },
+        params: { 
+          ...(search && { search }),
+        }
+      })
     },
+
+    searchHouses: _.debounce(function(search) {
+      this.loadHouses(search)
+    }, 500),
 
     submit () {
       if (!this.loading) {
         this.loading = true
-        // this.tenancyObj.house_id = this.house.id
         this.tenancyObj.store().then((response) => {
           flash(response)
           this.$emit('stored')
@@ -176,11 +198,7 @@ export default {
   },
 
   mounted () {
-    this.setHouses({
-      routes: {
-        apartment: vault.extract('apartment').id
-      }
-    })
+    this.loadHouses()
   }
 }
 </script>

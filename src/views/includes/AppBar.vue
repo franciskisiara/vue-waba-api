@@ -81,8 +81,10 @@ export default {
     return {
       links: [
         // { title: 'Dashboard', icon: 'mdi-google-analytics', to: '/' },
-        { title: 'Tenancies', icon: 'mdi-home-group', to: '/tenancies' },
-        // { title: 'Readings', icon: 'mdi-gauge', to: '/readings' },
+        
+        { title: 'Readings', icon: 'mdi-gauge', to: '/readings' },
+        { title: 'Payments', icon: 'mdi-gauge', to: '/readings' },
+        { title: 'Settings', icon: 'mdi-home-group', to: '/tenancies' },
       ]
     }
   },  

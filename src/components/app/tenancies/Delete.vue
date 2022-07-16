@@ -31,7 +31,7 @@
 </template>
 
 <script>
-import Tenancy from '@/libs/app/tenancies/Tenancy'
+import Tenancy from '@/models/Tenancy'
 
 export default {
   props: [

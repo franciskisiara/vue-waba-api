@@ -58,9 +58,9 @@ export default {
   data () {
     return {
       headers: [
-        { text: 'House number', value: 'house_number' },
-        { text: 'Tenant name', value: 'tenant' },
-        { text: 'Tenant phone', value: 'tenant' },
+        { text: 'House', value: 'house_number' },
+        { text: 'Tenant', value: 'tenant' },
+        // { text: 'Tenant phone', value: 'tenant' },
         // { text: 'Actions', value: 'actions' },
       ],
     }

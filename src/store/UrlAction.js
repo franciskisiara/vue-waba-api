@@ -81,20 +81,22 @@ export default class UrlAction {
    * This looks at a url and determines if there is cause to search
    */
   params(params) {
-    let first_key = _.keys(params)[0];
-    let first_value = _.values(params)[0];
-    this.url = this.makeUrl(first_key, first_value)
-    _.each(params, (parameter, key) => {
-      if (key !== first_key && key) {
-        if (Array.isArray(parameter)) {
-          parameter.forEach(param => {
-            this.url = `${this.url}&${key}[]=${param}`
-          })
-        } else {
-          this.url = `${this.url}&${key}=${parameter}`
+    if (Object.keys(params).length > 0) {
+      let first_key = _.keys(params)[0];
+      let first_value = _.values(params)[0];
+      this.url = this.makeUrl(first_key, first_value)
+      _.each(params, (parameter, key) => {
+        if (key !== first_key && key) {
+          if (Array.isArray(parameter)) {
+            parameter.forEach(param => {
+              this.url = `${this.url}&${key}[]=${param}`
+            })
+          } else {
+            this.url = `${this.url}&${key}=${parameter}`
+          }
         }
-      }
-    })
+      })
+    }
   }
 
   routes(routes) {
