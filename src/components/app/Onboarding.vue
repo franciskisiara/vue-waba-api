@@ -142,7 +142,7 @@ export default {
       if (!this.loading) {
         this.loading = true
         this.apartmentObj.store().then(() => {
-          this.$router.push({ name: 'dashboard' })
+          this.$router.push({ name: 'houses.index' })
         }).finally(() => {
           this.loading = false
         })

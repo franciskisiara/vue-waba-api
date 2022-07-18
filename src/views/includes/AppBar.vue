@@ -38,7 +38,7 @@
     
     <v-spacer></v-spacer>
 
-    <v-btn 
+    <!-- <v-btn 
       icon
       small
       @click="search()"
@@ -46,7 +46,7 @@
       <v-icon small>
         mdi-magnify
       </v-icon>
-    </v-btn>
+    </v-btn> -->
 
     <v-avatar
       v-if="user.avatar"
@@ -89,8 +89,9 @@ export default {
   data () {
     return {
       links: [        
-        { title: 'Dashboard', icon: 'mdi-home-group', to: '/' },
-        { title: 'Readings', icon: 'mdi-gauge', to: '/readings' },
+        // { title: 'Dashboard', icon: 'mdi-home-group', to: '/' },
+        { title: 'Houses', icon: 'mdi-gauge', to: '/houses' },
+        // { title: 'Meter Readings', icon: 'mdi-gauge', to: '/readings' },
         // { title: 'Payments', icon: 'mdi-gauge', to: '/payments' },
       ]
     }

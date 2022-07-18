@@ -1,10 +1,21 @@
 <template>
-  <v-card 
-    v-if="initialised"
-    class="rounded-lg"
-    outlined
-  >
-    <v-card-text >
+  <v-card flat>
+    <v-card-title>
+      <div>
+        <h1 class="text-h6 font-weight-bold text--darken-3">
+          Houses
+        </h1>
+        <app-crumbs 
+          :crumbs="crumbs"
+        ></app-crumbs>
+      </div>
+      <v-spacer></v-spacer>
+      <houses-create
+        @stored="loadHouses()"
+      ></houses-create>
+    </v-card-title>
+
+    <v-card-text>
       <v-data-table
         flat 
         disable-sort
@@ -14,32 +25,53 @@
         :headers="headers" 
         :items="houses.data"
       >
-        <template v-slot:top>
-          <v-card-title class="pt-0 px-0">
-            <v-spacer></v-spacer>
-            <houses-create
-              @stored="loadHouses()"
-            ></houses-create>
-          </v-card-title>
-        </template>
-
         <template v-slot:item.tenant="{ item }">
-          {{ item.tenant ? item.tenant.name : 'n/a' }}
+          <router-link
+            v-if="item.tenant"
+            class="body-2"
+            :to="`tenancies/${item.active_tenancy_id}`"
+          >
+            {{ item.tenant.name }}
+          </router-link>
+          <span v-else>
+            n/a
+          </span>
         </template>
 
-        <template v-slot:item.actions="{ item }">
+        <template v-slot:item.house="{ item }">
           <v-btn
-            dark
-            label
+            icon
             small
-            text
-            color="#e74c3c"
-            class="caption ttn ma-0"
-            @click="lease(item)"
-            style="background-color: rgba(231, 76, 60,0.1)"
+            class="mt-n1"
+            :color="item.tenant ? '#e74c3c' : '#2ecc71'"
           >
-            Vacate
+            <v-icon
+              small
+              :color="item.tenant ? '#e74c3c' : '#2ecc71'"
+            >
+              {{ item.tenant ? 'mdi-door-closed-lock' :  'mdi-door-closed' }}
+            </v-icon>
           </v-btn>
+          
+
+          {{ item.house_number }}
+        </template>
+
+        <template v-slot:item.status="{ item }">
+          <v-chip 
+            dark
+            small
+            label
+            :color="item.tenant ? '#e74c3c' : '#2ecc71'"
+          >
+            {{ item.tenant ? 'rented' : 'vacant' }}
+          </v-chip>
+        </template>
+        <template v-slot:item.actions="{ item }">
+          <houses-actions
+            :house="item"
+            @reset="loadHouses()"
+          ></houses-actions>
         </template>
       </v-data-table>
     </v-card-text>
@@ -52,16 +84,20 @@ import { mapActions, mapGetters } from 'vuex'
 
 export default {
   components: {
-    'houses-create': () => import('@/components/app/houses/Create.vue')
+    'houses-create': () => import('@/components/app/houses/Create.vue'),
+    'houses-actions': () => import('@/components/app/houses/Actions.vue'),
   },
 
   data () {
     return {
+      crumbs: [
+        { text: 'Houses', disabled: true, },
+      ],
       headers: [
-        { text: 'House', value: 'house_number' },
+        // { text: 'Status', value: 'status' },
+        { text: 'House number', value: 'house' },
         { text: 'Tenant', value: 'tenant' },
-        // { text: 'Tenant phone', value: 'tenant' },
-        // { text: 'Actions', value: 'actions' },
+        { text: 'Actions', value: 'actions' },
       ],
     }
   },
@@ -69,11 +105,7 @@ export default {
   computed: {
     ...mapGetters({
       houses: 'getHouses'
-    }),
-
-    initialised () {
-      return this.houses.data
-    },
+    })
   },
 
   methods: {
@@ -82,22 +114,15 @@ export default {
     ]),
 
     loadHouses () {
-      const apartment = vault.extract('apartment')
       this.setHouses({
-        routes: {
-          apartment: apartment.id
+        path: {
+          apartment: vault.extract('apartment').id
         }
       })
     },
   },
 
   mounted () {
-    this.$emit('loaded', {
-      page: 'Houses',
-      crumbs: [
-        { text: 'Houses', disabled: true, },
-      ],
-    })
     this.loadHouses()
   }
 }

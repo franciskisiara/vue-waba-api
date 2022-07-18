@@ -1,20 +1,10 @@
 <template>
   <v-dialog
+    v-if="dialog"
     v-model="dialog"
     width="380"
     persistent
   >
-    <template v-slot:activator="{ on, attrs }">
-      <v-btn
-        color="primary"
-        class="rounded-lg body-2 ttn"
-        v-bind="attrs"
-        v-on="on"
-      >
-        Record reading
-      </v-btn>
-    </template>
-
     <v-card>
       <v-card-title>
         <h2 class="text-subtitle-1 font-weight-bold">
@@ -25,7 +15,7 @@
           icon
           small
           color="red"
-          @click="dialog = false"
+          @click="$emit('closed')"
         >
           <v-icon 
             small 
@@ -54,24 +44,6 @@
           :error="errors.has('meter_reading')"
           @input="errors.clear('meter_reading')"
         ></v-text-field>
-        <!-- 
-
-
-        <v-text-field
-          dense
-          outlined
-          persistent-hint
-          min="0"
-          step=".01"
-          prefix="UNT"
-          type="number"
-          class="rounded-lg"
-          label="Initial meter reading"
-          v-model="tenancyObj.meter_reading"
-          :hint="errors.get('meter_reading')"
-          :error="errors.has('meter_reading')"
-          @input="errors.clear('meter_reading')"
-        ></v-text-field> -->
       </v-card-text>
 
       <v-card-actions class="px-5 pb-5">
@@ -97,12 +69,23 @@
 import MeterReading from '@/models/MeterReading'
 
 export default {
+  props: [
+    'house',
+    'action'
+  ],
+
   data () {
     return {
       dialog: false,
       loading: false,
       meterReadingObj: new MeterReading()
     }
+  },
+
+  watch: {
+    action (action) {
+      this.dialog = action == 'record'
+    },
   },
 
   computed: {
@@ -115,6 +98,7 @@ export default {
     submit () {
       if (!this.loading) {
         this.loading = true
+        this.meterReadingObj.tenancy_id = this.house.active_tenancy_id
         this.meterReadingObj.store()
           .finally(() => {
             this.loading = false

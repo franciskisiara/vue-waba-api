@@ -74,8 +74,8 @@ export default {
   },
 
   watch: {
-    house (house) {
-      this.dialog = Boolean(house) && this.action == 'vacate'
+    action (action) {
+      this.dialog = action == 'vacate'
     }
   },
 

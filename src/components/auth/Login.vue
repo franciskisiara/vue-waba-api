@@ -126,7 +126,7 @@ export default {
     login () {
       this.authObj.login().then(() => {
         vault.extract('apartment')
-          ? this.$router.push({name: 'dashboard'})
+          ? this.$router.push({name: 'houses.index'})
           : this.$router.push({name: 'onboarding'})
       }).finally(() => {
         this.loading = false

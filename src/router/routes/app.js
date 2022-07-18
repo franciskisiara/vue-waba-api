@@ -34,16 +34,23 @@ export const appRoutes = () => ([
     },
     children: [
       {
-        path: '/',
-        name: 'dashboard',
-        component: () => import('@/components/app/dashboard/Index.vue')
+        path: '/houses',
+        name: 'houses.index',
+        component: () => import('@/components/app/houses/Index.vue')
       },
 
-      {
-        path: '/readings',
-        name: 'readings.index',
-        component: () => import('@/components/app/readings/Index.vue')
-      },
+      // {
+      //   path: '/tenancies',
+      //   name: 'tenancies.show',
+      //   component: () => import('@/components/app/readings/Index.vue'),
+      //   // children: [
+      //   //   {
+      //   //     path: '/houses',
+      //   //     name: 'tenancies.index',
+      //   //     component: () => import('@/components/app/houses/Index.vue')
+      //   //   },
+      //   // ]
+      // },
     ]
   }
 ])

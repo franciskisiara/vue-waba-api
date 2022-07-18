@@ -7,8 +7,6 @@ import router from './router'
 import store from './store'
 import vuetify from './plugins/vuetify'
 import VueTelInput from 'vue-tel-input'
-
-import 'vue-tel-input/dist/vue-tel-input.css'
 import './assets/sass/app.scss'
 
 Vue.config.productionTip = false
