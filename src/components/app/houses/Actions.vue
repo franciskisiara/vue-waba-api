@@ -50,7 +50,7 @@
       :house="house"
       :action="action"
       @closed="close()"
-      @deleted="reset()"
+      @stored="reset()"
     ></meter-readings-create>
   </div>
 </template>

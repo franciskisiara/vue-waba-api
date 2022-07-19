@@ -28,7 +28,7 @@
         <template v-slot:item.tenant="{ item }">
           <router-link
             v-if="item.tenant"
-            class="body-2"
+            class="body-2 dt-link"
             :to="`tenancies/${item.active_tenancy_id}`"
           >
             {{ item.tenant.name }}
@@ -42,7 +42,7 @@
           <v-btn
             icon
             small
-            class="mt-n1"
+            class="mt-n0 mx-0"
             :color="item.tenant ? '#e74c3c' : '#2ecc71'"
           >
             <v-icon
@@ -52,21 +52,13 @@
               {{ item.tenant ? 'mdi-door-closed-lock' :  'mdi-door-closed' }}
             </v-icon>
           </v-btn>
-          
-
           {{ item.house_number }}
         </template>
 
-        <template v-slot:item.status="{ item }">
-          <v-chip 
-            dark
-            small
-            label
-            :color="item.tenant ? '#e74c3c' : '#2ecc71'"
-          >
-            {{ item.tenant ? 'rented' : 'vacant' }}
-          </v-chip>
+        <template v-slot:item.balance="{ item }">
+          -
         </template>
+
         <template v-slot:item.actions="{ item }">
           <houses-actions
             :house="item"
@@ -94,9 +86,9 @@ export default {
         { text: 'Houses', disabled: true, },
       ],
       headers: [
-        // { text: 'Status', value: 'status' },
         { text: 'House number', value: 'house' },
-        { text: 'Tenant', value: 'tenant' },
+        { text: 'Tenant name', value: 'tenant' },
+        { text: 'Balance', value: 'balance' },
         { text: 'Actions', value: 'actions' },
       ],
     }
@@ -127,3 +119,11 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+  .dt-link {
+    &:hover {
+      border-bottom: 1px solid #3BACB6;
+    }
+  }
+</style>

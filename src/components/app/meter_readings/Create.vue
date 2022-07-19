@@ -100,6 +100,10 @@ export default {
         this.loading = true
         this.meterReadingObj.tenancy_id = this.house.active_tenancy_id
         this.meterReadingObj.store()
+          .then((response) => {
+            flash(response)
+            this.$emit('stored')
+          })
           .finally(() => {
             this.loading = false
           })

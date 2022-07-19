@@ -5,7 +5,7 @@ const fields = {
   house_id: null,
   tenant: {
     name: null,
-    phone: null,
+    phone: '',
   },
 }
 
@@ -21,7 +21,7 @@ export default class Tenancy extends Base {
         let response = await this.form.submit('post', `/api/apartments/${this.apartment.id}/tenancies`, data)
         this.setFields(fields)
         this.tenant.name = null
-        this.tenant.phone = null
+        this.tenant.phone = ''
         resolve(response)
       } catch (err) {
         reject(err)
