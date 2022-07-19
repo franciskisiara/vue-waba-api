@@ -42,7 +42,7 @@
           <v-btn
             icon
             small
-            class="mt-n0 mx-0"
+            class="mt-n1 mx-0"
             :color="item.tenant ? '#e74c3c' : '#2ecc71'"
           >
             <v-icon
