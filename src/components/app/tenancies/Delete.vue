@@ -75,7 +75,7 @@ export default {
 
   watch: {
     action (action) {
-      this.dialog = action == 'vacate'
+      this.dialog = action == 'vacate' && this.house.tenancy
     }
   },
 
@@ -89,7 +89,7 @@ export default {
     submit () {
       if (!this.loading) {
         this.loading = true
-        this.tenancyObj.destroy(this.house.active_tenancy_id)
+        this.tenancyObj.destroy(this.house.tenancy.id)
           .then((response) => {
             flash(response)
             this.$emit('deleted')

@@ -27,9 +27,9 @@
       >
         <template v-slot:item.tenant="{ item }">
           <router-link
-            v-if="item.tenant"
+            v-if="item.tenancy"
             class="body-2 dt-link"
-            :to="`tenancies/${item.active_tenancy_id}`"
+            :to="`tenancies/${item.tenancy.id}`"
           >
             {{ item.tenant.name }}
           </router-link>
@@ -43,20 +43,20 @@
             icon
             small
             class="mt-n1 mx-0"
-            :color="item.tenant ? '#e74c3c' : '#2ecc71'"
+            :color="item.tenancy ? '#e74c3c' : '#2ecc71'"
           >
             <v-icon
               small
-              :color="item.tenant ? '#e74c3c' : '#2ecc71'"
+              :color="item.tenancy ? '#e74c3c' : '#2ecc71'"
             >
-              {{ item.tenant ? 'mdi-door-closed-lock' :  'mdi-door-closed' }}
+              {{ item.tenancy ? 'mdi-door-closed-lock' :  'mdi-door-closed' }}
             </v-icon>
           </v-btn>
           {{ item.house_number }}
         </template>
 
         <template v-slot:item.balance="{ item }">
-          -
+          {{ item.tenancy ? item.tenancy.running_balance : '-' }}
         </template>
 
         <template v-slot:item.actions="{ item }">

@@ -52,6 +52,13 @@
       @closed="close()"
       @stored="reset()"
     ></meter-readings-create>
+
+    <payments-create
+      :house="house"
+      :action="action"
+      @closed="close()"
+      @stored="reset()"
+    ></payments-create>
   </div>
 </template>
 
@@ -65,6 +72,7 @@ export default {
     'tenancies-create': () => import('@/components/app/tenancies/Create.vue'),
     'tenancies-delete': () => import('@/components/app/tenancies/Delete.vue'),
     'meter-readings-create': () => import('@/components/app/meter_readings/Create.vue'),
+    'payments-create': () => import('@/components/app/payments/Create.vue'),
   },
 
   data () {
@@ -81,12 +89,12 @@ export default {
 
   methods: {
     run (action) {
-      if (action.tenancy && !this.house.active_tenancy_id) {
+      if (action.tenancy && !this.house.tenancy) {
         flash({ message: 'Action requires an active tenancy' })
         return
       }
 
-      if (!action.tenancy && this.house.active_tenancy_id) {
+      if (!action.tenancy && this.house.tenancy) {
         flash({ message: 'Action requires house to be vacant' })
         return
       }

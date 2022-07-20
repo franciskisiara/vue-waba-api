@@ -2,13 +2,13 @@
   <v-dialog
     v-if="dialog"
     v-model="dialog"
-    width="380"
+    width="360"
     persistent
   >
     <v-card>
       <v-card-title>
         <h2 class="text-subtitle-1 font-weight-bold">
-          Record a meter reading
+          Collect payment
         </h2>
         <v-spacer></v-spacer>
         <v-btn
@@ -20,6 +20,7 @@
           <v-icon 
             small 
             color="red"
+            @close="$emit('closed')"
           >
             mdi-close
           </v-icon>
@@ -27,22 +28,18 @@
       </v-card-title>
 
       <v-divider class="mb-5"></v-divider>
-
+      
       <v-card-text>
         <v-text-field
           dense
           outlined
-          persistent-hint
-          min="0"
-          step=".01"
-          type="number"
-          suffix="UNITS"
+           persistent-hint
           class="rounded-lg"
-          label="Meter reading"
-          v-model="meterReadingObj.meter_reading"
-          :hint="errors.get('meter_reading')"
-          :error="errors.has('meter_reading')"
-          @input="errors.clear('meter_reading')"
+          label="Amount paid"
+          v-model="paymentObj.amount"
+          :hint="errors.get('amount')"
+          :error="errors.has('amount')"
+          @input="errors.clear('amount')"
         ></v-text-field>
       </v-card-text>
 
@@ -58,7 +55,7 @@
           :disabled="loading"
           @click="submit()"
         >
-          Record reading details
+          Record Payment
         </v-btn>
       </v-card-actions>
     </v-card>
@@ -66,7 +63,7 @@
 </template>
 
 <script>
-import MeterReading from '@/models/MeterReading'
+import Payment from '@/models/Payment'
 
 export default {
   props: [
@@ -78,19 +75,19 @@ export default {
     return {
       dialog: false,
       loading: false,
-      meterReadingObj: new MeterReading()
+      paymentObj: new Payment()
     }
   },
 
   watch: {
     action (action) {
-      this.dialog = action == 'record' && this.house.tenancy
-    },
+      this.dialog = action == 'collect' && this.house.tenancy
+    }
   },
 
   computed: {
     errors () {
-      return this.meterReadingObj.form.errors
+      return this.paymentObj.form.errors
     }
   },
 
@@ -98,17 +95,16 @@ export default {
     submit () {
       if (!this.loading) {
         this.loading = true
-        this.meterReadingObj.tenancy_id = this.house.tenancy.id
-        this.meterReadingObj.store()
+        this.paymentObj.tenancy_id = this.house.tenancy.id
+        this.paymentObj.store()
           .then((response) => {
             flash(response)
             this.$emit('stored')
-          })
-          .finally(() => {
+          }).finally(() => {
             this.loading = false
           })
       }
-    }
-  },
+    },
+  }
 }
 </script>
