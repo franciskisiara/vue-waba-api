@@ -34,6 +34,12 @@ export const appRoutes = () => ([
     },
     children: [
       {
+        path: '/',
+        name: 'dashboard',
+        component: () => import('@/components/app/houses/Index.vue')
+      },
+
+      {
         path: '/houses',
         name: 'houses.index',
         component: () => import('@/components/app/houses/Index.vue')

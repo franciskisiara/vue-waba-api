@@ -18,7 +18,8 @@ export default class Form {
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${vault.extract('token')}`
+          'X-Requested-With': 'XMLHttpRequest',
+          'Authorization': `Bearer ${vault.extract('token')}`,
         }
       })
         .then(({ data }) => {

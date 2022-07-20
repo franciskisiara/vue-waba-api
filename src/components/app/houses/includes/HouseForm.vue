@@ -34,7 +34,7 @@
           persistent-hint
           class="rounded-lg"
           label="House number"
-           v-model="houseObj.house_number"
+          v-model="houseObj.house_number"
           :hint="errors.get('house_number')"
           :error="errors.has('house_number')"
           @input="errors.clear('house_number')"
