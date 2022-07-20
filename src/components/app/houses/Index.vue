@@ -26,7 +26,7 @@
         :items="houses.data"
       >
         <template v-slot:item.tenant="{ item }">
-          <router-link
+          <!-- <router-link
             v-if="item.tenancy"
             class="body-2 dt-link"
             :to="`tenancies/${item.tenancy.id}`"
@@ -35,7 +35,8 @@
           </router-link>
           <span v-else>
             n/a
-          </span>
+          </span> -->
+          {{ item.tenancy ? item.tenant.name : 'n/a' }}
         </template>
 
         <template v-slot:item.house="{ item }">

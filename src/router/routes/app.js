@@ -39,18 +39,11 @@ export const appRoutes = () => ([
         component: () => import('@/components/app/houses/Index.vue')
       },
 
-      // {
-      //   path: '/tenancies',
-      //   name: 'tenancies.show',
-      //   component: () => import('@/components/app/readings/Index.vue'),
-      //   // children: [
-      //   //   {
-      //   //     path: '/houses',
-      //   //     name: 'tenancies.index',
-      //   //     component: () => import('@/components/app/houses/Index.vue')
-      //   //   },
-      //   // ]
-      // },
+      {
+        path: '/tenancies/:tenancyId',
+        name: 'tenancies.show',
+        component: () => import('@/components/app/tenancies/Show.vue'),
+      },
     ]
   }
 ])
