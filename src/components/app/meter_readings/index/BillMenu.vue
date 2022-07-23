@@ -13,12 +13,6 @@
         class="body-2 ttn rounded-0 pa-0 px-2"
         style="border-bottom: 1px dashed #e74c3c;"
       >
-        <v-icon 
-          small
-          class="mr-1"
-        >
-          mdi-information
-        </v-icon> 
         Ksh {{ meterReading.bill.total_charge }}
       </v-btn>
     </template>

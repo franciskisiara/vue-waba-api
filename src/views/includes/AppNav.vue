@@ -21,9 +21,9 @@ export default {
   data () {
     return {
       links: [
-        { title: 'Dashboard', icon: 'mdi-google-analytics', to: '/dashboard' },
-        { title: 'Tenancies', icon: 'mdi-home-group', to: '/tenancies' },
-        { title: 'Readings', icon: 'mdi-gauge', to: '/readings' },
+        { title: 'Dashboard', icon: 'mdi-google-analytics', to: '/' },
+        { title: 'Houses', icon: 'mdi-home-group', to: '/houses' },
+        { title: 'Readings', icon: 'mdi-gauge', to: '/meter-readings' },
       ]
     }
   }

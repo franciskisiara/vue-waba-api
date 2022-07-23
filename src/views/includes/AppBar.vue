@@ -44,7 +44,7 @@
       @click="search()"
     >
       <v-icon small>
-        mdi-magnify
+        mdi-bell-badge
       </v-icon>
     </v-btn> -->
 
@@ -91,7 +91,7 @@ export default {
       links: [        
         // { title: 'Dashboard', icon: 'mdi-home-group', to: '/' },
         { title: 'Houses', icon: 'mdi-gauge', to: '/houses' },
-        // { title: 'Meter Readings', icon: 'mdi-gauge', to: '/readings' },
+        { title: 'Meter Readings', icon: 'mdi-gauge', to: '/meter-readings' },
         // { title: 'Payments', icon: 'mdi-gauge', to: '/payments' },
       ]
     }

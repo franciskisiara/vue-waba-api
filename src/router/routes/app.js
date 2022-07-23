@@ -46,9 +46,9 @@ export const appRoutes = () => ([
       },
 
       {
-        path: '/tenancies/:tenancyId',
-        name: 'tenancies.show',
-        component: () => import('@/components/app/tenancies/Show.vue'),
+        path: '/meter-readings',
+        name: 'meter-readings.index',
+        component: () => import('@/components/app/meter_readings/Index.vue'),
       },
     ]
   }

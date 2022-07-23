@@ -9,10 +9,6 @@
           :crumbs="crumbs"
         ></app-crumbs>
       </div>
-      <v-spacer></v-spacer>
-      <meter-readings-create
-        @stored="loadMeterReadings()"
-      ></meter-readings-create>
     </v-card-title>
 
     <v-card-text>
@@ -25,34 +21,32 @@
         :headers="headers" 
         :items="meterReadings.data"
       >
-        <template v-slot:item.communication_status="{ item }">
+        <template v-slot:item.bill_delivery_status="{ item }">
           <v-chip 
             dark
             small
             label
-            :color="commsColor[item.communication_status]"
+            :color="commsColor[item.bill_delivery_status]"
           >
-            {{ item.communication_status }}
+            {{ item.bill_delivery_status }}
           </v-chip>
+        </template>
+
+        <template v-slot:item.house="{ item }">
+          {{ item.house.house_number }}
+        </template>
+
+        <template v-slot:item.tenant="{ item }">
+          {{ item.tenant.name }} 
+          <p class="ma-0 caption">
+            {{ item.tenant.phone }}
+          </p>
         </template>
 
         <template v-slot:item.bill="{ item }">
           <bill-menu
             :meter-reading="item"
           ></bill-menu>
-        </template>
-
-        <template v-slot:item.actions="{ item }">
-          <v-btn
-            text
-            small
-            color="primary"
-            class="caption ttn"
-            @click="lease(item)"
-            style="background-color: rgba(79, 179, 188, 0.1)"
-          >
-            Record payment
-          </v-btn>
         </template>
       </v-data-table>
     </v-card-text>
@@ -65,7 +59,6 @@ import { mapActions, mapGetters } from 'vuex'
 
 export default {
   components: {
-    'meter-readings-create': () => import('./Create.vue'),
     'bill-menu': () => import('./index/BillMenu.vue'),
   },
 
@@ -75,15 +68,16 @@ export default {
         { text: 'Meter readings', disabled: true, },
       ],
       headers: [
-        { text: 'INV.', value: 'communication_status', width: '10%' },
-        { text: 'Occupancy', value: 'occupancy' },
+        { text: 'Delivery status', value: 'bill_delivery_status', },
+        { text: 'House', value: 'house' },
+        { text: 'Tenant', value: 'tenant' },
         { text: 'Total Bill', value: 'bill' },
-        { text: 'Actions', value: 'actions' },
+        { text: 'Date', value: 'created_at' },
       ],
       commsColor: {
         failed: '#e74c3c',
         pending: '#9b59b6',
-        delivered: '#2ecc71'
+        success: '#2ecc71'
       }
     }
   },
